@@ -40,45 +40,26 @@ int d[]={15,33,22,20,21,-10,-22,-10,-22,-56};  //jump values in case of snake or
 time_t t;		//initialising/seeding random values
 t=time(NULL);
 srand(t);
-
+for (i = 0; i < 10; i++)
+	printf("From %d to %d\n", c[i], c[i] + d[i]);
 while (1)
 {
 f=(e%2)+1;			//condition to swap player 1 and player 2
-printf("Player %d turn\n",f);
 
- 
+n = 0;
 while(1)				//rolling dice
   {
-  printf("Press Enter/Return to roll the dice");
+  if (n!=10)//for ascii enter
+	  printf("Player %d, give the dice\n",f);
   scanf("%c",&n);
-  if (n==10)		// 10 is the ASCII code of return/enter or line break \n
+  if (n - '0' > 0 && n-'0' < 7)		
     {
-    x=(rand()%6)+1;
-    break;
+		x = n - '0';
+		break;
     }     
   }
   printf("The dice tuned to be : %d\n",x);	//rolling dice
 
-
-
-while(1)		// case when dice turns to be 6
-  {
-  if (x!=6 && y!=6)
-  break;
-  while(1)		// loop condition to roll the dice
-    {
-    printf("Your dice returned to be 6. So, \n");
-    printf("Press Enter/Return to roll the dice again");
-    scanf("%c",&n);		// 10 is the ASCII code for return/enter or line break \n
-    if (n==10)
-      {
-      y=(rand()%6)+1;
-      break;
-      }
-    }			// end of dice loop
-   printf("The new dice value is %d\n",y);
-   x=x+y;
-   }		//end of case 6
 
 if (f==1)		//passing the value of a to a dummy value
   p=a;
@@ -93,8 +74,10 @@ else if (p+x <= 100)
 
   for(i=0;i<10;i++)		//condition to check snakes and ladders
     {
-    if (p==c[i])
-    p=p+d[i];
+		if (p == c[i]) {
+			printf("Moving through %s\n", (d[i]>0) ? "ladder" : "snake");
+			p = p + d[i];
+		}
     }
   }
 
